@@ -16,12 +16,15 @@ import {
 } from "@excalidraw/excalidraw/types/types";
 import { ExcalidrawElement } from "@excalidraw/excalidraw/types/element/types";
 import _ from "lodash-es";
+import rewriteAllFont from './rewriteFont'
 
 const mimeTypeFallbacks = {
   "application/json": ["image/png", "image/svg+xml"],
   "image/svg+xml": ["application/json", "image/png"],
   "image/png": ["application/json", "image/svg+xml"],
 };
+
+rewriteAllFont()
 
 async function getInitialData(
   content: Uint8Array,
