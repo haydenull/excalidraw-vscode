@@ -1,3 +1,5 @@
+import { vscode } from "./vscode"
+
 export const FONT_ID = {
   'Hand-drawn': 'Virgil',
   'Normal': 'Cascadia',
@@ -29,7 +31,11 @@ const rewriteAllFont = async () => {
   // for (const [name, url] of Object.entries(customFont)) {
   //   if (url) rewriteFont(FONT_ID[name as keyof typeof FONT_ID], url)
   // }
-  rewriteFont(FONT_ID["Hand-drawn"], 'https://pocket.haydenhayden.com/font/chinese.woff2')
+  // rewriteFont(FONT_ID["Hand-drawn"], 'https://pocket.haydenhayden.com/font/chinese.woff2')
+
+
+
+  rewriteFont(FONT_ID["Hand-drawn"], './chinese.woff2')
   // rewriteFont(FONT_ID["Hand-drawn"], 'file:///Users/Hayden/Downloads/chinese.woff2')
 }
 

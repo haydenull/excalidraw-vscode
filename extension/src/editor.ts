@@ -147,6 +147,9 @@ export class ExcalidrawEditor {
     // Receive message from the webview.
     this.webview.options = {
       enableScripts: true,
+      // webviewContentOptions: {
+
+      // },
     };
 
     let libraryUri = await this.getLibraryUri();
@@ -354,8 +357,27 @@ export class ExcalidrawEditor {
       Base64.encode(JSON.stringify(config))
     );
 
+    html = html.replace(
+      'url("chinese.woff2")',
+      `url(${this.webview.asWebviewUri(vscode.Uri.joinPath(publicUri, "chinese.woff2"))})`,
+    );
+    // html = html.replace(
+    //   'url("/Users/Hayden/Downloads/chinese.woff2")',
+    //   // `url(${this.webview.asWebviewUri(vscode.Uri.joinPath(publicUri, "/Users/Hayden/Downloads/chinese.woff2"))})`,
+    //   `url(${this.webview.asWebviewUri(vscode.Uri.file("/Users/Hayden/Downloads/chinese.woff2"))})`,
+    // );
+
     return this.fixLinks(html, publicUri);
   }
+  // private async rewriteFont (document: string, documentUri: vscode.Uri): string {
+  //   const publicUri = vscode.Uri.joinPath(this.context.extensionUri, "public");
+
+  //   html = html.replace(
+  //     "{{data-excalidraw-config}}",
+  //     Base64.encode(JSON.stringify(config))
+  //   );
+  //   return html
+  // }
   private fixLinks(document: string, documentUri: vscode.Uri): string {
     return document.replace(
       new RegExp("((?:src|href)=['\"])(.*?)(['\"])", "gmi"),
@@ -368,6 +390,20 @@ export class ExcalidrawEditor {
         ) {
           return subString;
         }
+        // if (
+        //   p2.startsWith("/Users/Hayden")
+        // ) {
+        //   const newUri = vscode.Uri.file(p2);
+        //   const newUrl = [p1, this.webview.asWebviewUri(newUri), p3].join("");
+        //   return newUrl;
+        // }
+        // if (
+        //   p2.startsWith("file://")
+        // ) {
+        //   const newUri = p2.replace('file://', 'vscode-file://vscode-app');
+        //   const newUrl = [p1,  vscode.Uri.parse(newUri).toString(), p3].join("");
+        //   return newUrl;
+        // }
         const newUri = vscode.Uri.joinPath(documentUri, p2);
         const newUrl = [p1, this.webview.asWebviewUri(newUri), p3].join("");
         return newUrl;

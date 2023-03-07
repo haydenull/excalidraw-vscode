@@ -24,7 +24,7 @@ const mimeTypeFallbacks = {
   "image/png": ["application/json", "image/svg+xml"],
 };
 
-rewriteAllFont()
+// rewriteAllFont()
 
 async function getInitialData(
   content: Uint8Array,
